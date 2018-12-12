@@ -3,8 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@xinghunm/widgets": "0.0.9",
     "connected-react-router": "^4.3.0",
+    "express": "^4.16.4",
     "history": "^4.7.2",
+    "nodemon": "^1.18.8",
     "promise": "8.0.1",
     "prop-types": "^15.6.2",
     "react": "^16.4.1",
@@ -65,6 +68,7 @@
     "start": "PORT=1989 node scripts/start.js",
     "build": "node scripts/build.js",
     "test": "jest test --colors",
-    "coverage": "jest --colors --coverage"
+    "coverage": "jest --colors --coverage",
+    "server": "NODE_ENV=development nodemon --exec 'babel-node' server.js"
   }
 }
