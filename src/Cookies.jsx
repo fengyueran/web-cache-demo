@@ -66,8 +66,11 @@ class Cookies extends Component {
 
   handleSubmit = () => {
     const xhr = new XMLHttpRequest();
-    xhr.open('GET', 'http://localhost:8080/submit', true);
-    xhr.send();
+    // xhr.open('GET', 'http://localhost:8080/submit?username=xhm', true);
+    xhr.open('POST', 'http://localhost:8080/postSubmit', true);
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
+    const data = `username=xhm`;
+    xhr.send(data);
   }
 
   handleClick = () => {

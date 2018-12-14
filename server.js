@@ -1,9 +1,14 @@
 import express from 'express';
+import bodyParser from 'body-parser';
 import path from 'path';
+import cors from 'cors';
 
 const PORT = 8080;
 const server = express();
 
+server.use(bodyParser.urlencoded({ extended: false }));
+server.use(bodyParser.json());
+server.use('*', cors({ origin: 'http://localhost:1989' }));
 
 server.get('/', (req, res) => {
   res.setHeader('status', '200 OK');
@@ -13,7 +18,13 @@ server.get('/', (req, res) => {
 });
 
 server.get('/submit', (req, res) => {
-  console.log('submit');
+  console.log('submit', req.query);
+  res.setHeader('status', '200 OK');
+  res.end();
+});
+
+server.post('/postSubmit', (req, res) => {
+  console.log('submit', req.body);
   res.setHeader('status', '200 OK');
   res.end();
 });
