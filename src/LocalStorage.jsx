@@ -1,8 +1,6 @@
-
-import React, { Component } from 'react';
-import styled from 'styled-components';
-import { LineBox, VerticalBox, Button } from '@xinghunm/widgets';
-
+import React, { Component } from "react";
+import styled from "styled-components";
+import { LineBox, VerticalBox, Button } from "@xinghunm/widgets";
 
 const Container = styled(VerticalBox)`
   padding: 20px;
@@ -14,7 +12,7 @@ const Text = styled.span`
 `;
 
 const Welcome = styled.span`
-  margin-top:10px;
+  margin-top: 10px;
   color: blue;
 `;
 
@@ -35,41 +33,56 @@ const getItem = (key) => {
   return value;
 };
 
-const checkCookie = () => {
-  const user = getItem('username');
+const checkLocalStorage = () => {
+  const user = getItem("username");
   return user;
+};
+
+const clear = () => {
+  localStorage.clear();
+};
+
+const removeItem = () => {
+  localStorage.removeItem("key");
+};
+
+const getAllValues = () => {
+  const obj = [];
+  for (let i = 0; i < localStorage.length; i++) {
+    const key = localStorage.key(i);
+    obj.push(localStorage[key]);
+  }
+  return obj;
 };
 
 class LocalStorage extends Component {
   componentWillMount() {
-    const user = checkCookie();
+    const user = checkLocalStorage();
     this.setState({ user });
   }
 
   getInput = (ref) => {
     this.input = ref;
-  }
+  };
 
   handleClick = () => {
     const value = this.input.value;
-    setItem('username', value);
-  }
+    setItem("username", value);
+  };
 
   render() {
     const { user } = this.state;
     return (
       <Container>
         <Text>LocalStorage</Text>
-        {
-          user 
-            ? <Welcome>{`Welcome ${user}`}</Welcome>
-            : (
-              <LineBox>
-                <Input innerRef={this.getInput} placeholder="请输入用户名" />
-                <Button onClick={this.handleClick}>确定</Button>
-              </LineBox>
-            )
-        }
+        {user ? (
+          <Welcome>{`Welcome ${user}`}</Welcome>
+        ) : (
+          <LineBox>
+            <Input innerRef={this.getInput} placeholder="请输入用户名" />
+            <Button onClick={this.handleClick}>确定</Button>
+          </LineBox>
+        )}
       </Container>
     );
   }
